@@ -10,6 +10,7 @@
     "license": "MIT",
     "require": {
         "php": "^8.3",
+        "inertiajs/inertia-laravel": "^3.3",
         "laravel/framework": "^13.17",
         "laravel/tinker": "^3.0"
     },
@@ -44,6 +45,10 @@
             "@php artisan migrate --force",
             "npm install --ignore-scripts",
             "npm run build"
+        ],
+        "format": [
+            "@php vendor/bin/rector",
+            "@php vendor/bin/pint"
         ],
         "dev": [
             "Composer\\Config::disableProcessTimeout",
