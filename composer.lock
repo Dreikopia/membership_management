@@ -37,8 +37,8 @@
             "license": [
                 "MIT"
             ],
-            "description": "Arbitrary-precision arithmetic library",
-            "keywords": [
+            "de
+            ion": "Arbitrary-precision arithmetic library","keywords": [
                 "Arbitrary-precision",
                 "BigInteger",
                 "BigRational",
