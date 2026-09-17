@@ -30,8 +30,8 @@ class Membership extends Model
         return $this->belongsTo(Member::class);
     }
 
-    public function plan()
+    public function planPrice()
     {
-        return $this->belongsTo(Plan::class);
+        return $this->belongsTo(PlanPrice::class);
     }
 }

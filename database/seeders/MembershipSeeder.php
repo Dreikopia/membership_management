@@ -16,7 +16,7 @@ class MembershipSeeder extends Seeder
         foreach ($members as $member) {
             $plan = $plans->random();
             $startDate = now()->subDays(rand(1, 300));
-            Membership::create(['member_id' => $member->id, 'plan_id' => $plan->id, 'start_date' => $startDate, 'end_date' => $startDate->copy()->addDays($plan->duration_days), 'status' => 'active']);
+            Membership::create(['member_id' => $member->id, 'plan_price_id' => $plan->id, 'start_date' => $startDate, 'end_date' => $startDate->copy()->addDays($plan->duration_days), 'status' => 'active']);
         }
     }
 }

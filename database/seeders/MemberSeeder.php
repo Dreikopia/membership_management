@@ -20,7 +20,7 @@ class MemberSeeder extends Seeder
 
             Membership::create([
                 'member_id' => $member->id,
-                'plan_id' => $plan->id,
+                'plan_price_id' => $plan->id,
                 'start_date' => now()->subDays(rand(1, 300)),
                 'end_date' => now()->addDays(rand(1, 365)),
                 'status' => 'active',
