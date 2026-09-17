@@ -23,7 +23,7 @@ const AddMemberDialog = ({ open, onOpenChange, plans }) => {
         first_name: '',
         last_name: '',
         email: '',
-        plan_id: '',
+        plan_price_id: '',
         phone: '',
         address: '',
         date_of_birth: '',
@@ -38,6 +38,15 @@ const AddMemberDialog = ({ open, onOpenChange, plans }) => {
             },
         })
     }
+    const selectedPrice = plans
+        .flatMap((plan) =>
+            plan.prices.map((price) => ({
+                ...price,
+                planName: plan.name,
+            }))
+        )
+        .find((price) => String(price.id) === String(data.plan_price_id))
+
 
     return (
         <Dialog open={open} onOpenChange={onOpenChange}>
@@ -80,28 +89,37 @@ const AddMemberDialog = ({ open, onOpenChange, plans }) => {
                         </div>
 
                         <div>
-                            <Label htmlFor="plan_id">Membership Plan</Label>
+                            <Label htmlFor="plan_price_id">Membership Plan</Label>
+
                             <Select
-                                value={data.plan_id ? String(data.plan_id) : undefined}
-                                onValueChange={(value) => setData('plan_id', value)}
+                                value={data.plan_price_id ? String(data.plan_price_id) : undefined}
+                                onValueChange={(value) => setData('plan_price_id', value)}
                             >
-                                <SelectTrigger id="plan_id" className="w-full">
+                                <SelectTrigger id="plan_price_id" className="w-full">
                                     <SelectValue placeholder="Select a plan">
-                                        {plans.find(
-                                            (plan) => String(plan.id) === String(data.plan_id)
-                                        )?.name}
+                                        {selectedPrice
+                                            ? `${selectedPrice.planName} - ${selectedPrice.billing_period}`
+                                            : undefined}
                                     </SelectValue>
                                 </SelectTrigger>
-
                                 <SelectContent>
-                                    {plans.map((plan) => (
-                                        <SelectItem key={plan.id} value={String(plan.id)}>
-                                            {plan.name}
-                                        </SelectItem>
-                                    ))}
+                                    {plans.map((plan) =>
+                                        plan.prices.map((price) => (
+                                            <SelectItem
+                                                key={price.id}
+                                                value={String(price.id)}
+                                            >
+                                                {plan.name} - {price.billing_period}
+                                            </SelectItem>
+                                        ))
+                                    )}
                                 </SelectContent>
                             </Select>
-                            {errors.plan_id && <p className="text-sm text-red-500">{errors.plan_id}</p>}
+                            {errors.plan_price_id && (
+                                <p className="text-sm text-red-500">
+                                    {errors.plan_price_id}
+                                </p>
+                            )}
                         </div>
                     </div>
 

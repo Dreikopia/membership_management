@@ -22,7 +22,7 @@ export function AppSidebar() {
       <SidebarHeader>
         <div className="flex items-center px-4 py-4">
           <h1 className="text-lg font-semibold">
-            Member Management
+            ManageMem
           </h1>
         </div>
       </SidebarHeader>

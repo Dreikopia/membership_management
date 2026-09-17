@@ -29,6 +29,11 @@ class storeMemberRequest extends FormRequest
             'phone' => ['required', 'string', 'regex:/^(09|\+639)\d{9}$/'],
             'date_of_birth' => ['required', 'date', 'before:today'],
             'address' => ['required', 'string', 'min:10', 'max:500'],
+            'plan_price_id' => [
+                'required',
+                'integer',
+                'exists:plan_prices,id',
+            ],
         ];
     }
 }

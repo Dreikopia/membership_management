@@ -11,7 +11,7 @@ class Membership extends Model
 
     protected $fillable = [
         'member_id',
-        'plan_id',
+        'plan_price_id',
         'start_date',
         'end_date',
         'status',

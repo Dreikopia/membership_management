@@ -1,3 +1,11 @@
+import { Badge } from "@/components/ui/badge";
+const statusVariants = {
+    active: "default",
+    inactive: "secondary",
+    expired: "destructive",
+    suspended: "outline",
+};
+
 export const columns = [
     {
         accessorKey: "id",
@@ -18,7 +26,8 @@ export const columns = [
     {
         accessorKey: "plan_name",
         header: "Plan",
-        cell: ({ row }) => row.original.memberships[0]?.plan?.name ?? "—",
+        cell: ({ row }) =>
+            row.original.memberships[0]?.plan_price?.plan?.name ?? "—",
     },
     {
         accessorKey: "end_date",
@@ -38,5 +47,14 @@ export const columns = [
     {
         accessorKey: "status",
         header: "Status",
+        cell: ({ row }) => {
+            const { value, label } = row.original.status;
+
+            return (
+                <Badge variant={statusVariants[value]}>
+                    {label}
+                </Badge>
+            );
+        },
     },
 ]

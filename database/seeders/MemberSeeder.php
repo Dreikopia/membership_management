@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Member;
 use App\Models\Membership;
-use App\Models\Plan;
+use App\Models\PlanPrice;
 use Illuminate\Database\Seeder;
 
 class MemberSeeder extends Seeder
@@ -13,14 +13,14 @@ class MemberSeeder extends Seeder
     {
         $members = Member::factory()->count(25)->create();
 
-        $plans = Plan::all();
+        $planPrices = PlanPrice::all();
 
         foreach ($members as $member) {
-            $plan = $plans->random();
+            $planPrice = $planPrices->random();
 
             Membership::create([
                 'member_id' => $member->id,
-                'plan_price_id' => $plan->id,
+                'plan_price_id' => $planPrice->id,
                 'start_date' => now()->subDays(rand(1, 300)),
                 'end_date' => now()->addDays(rand(1, 365)),
                 'status' => 'active',
