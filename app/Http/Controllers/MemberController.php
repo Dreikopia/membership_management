@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Enums\MemberStatus;
-use App\Http\Requests\storeMemberRequest;
+use App\Http\Requests\StoreMemberRequest;
 use App\Models\Member;
 use App\Models\Plan;
 use App\Models\PlanPrice;
@@ -38,7 +38,7 @@ class MemberController extends Controller
         ]);
     }
 
-    public function store(storeMemberRequest $request)
+    public function store(StoreMemberRequest $request)
     {
         $validated = $request->validated();
 

@@ -1,12 +1,18 @@
 <?php
 
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\DashboardControler;
 use App\Http\Controllers\MemberController;
 use Illuminate\Support\Facades\Route;
-use Inertia\Inertia;
 
-Route::get('/', function () {
-    return Inertia::render('Dashboard');
+Route::middleware('guest')->group(function () {
+    Route::get('/login', [AuthenticatedSessionController::class, 'create'])->name('login');
+    Route::post('/login', [AuthenticatedSessionController::class, 'store']);
 });
 
-Route::get('/members', [MemberController::class, 'index'])->name('members.index');
-Route::post('/members', [MemberController::class, 'store'])->name('members.store');
+Route::middleware('auth')->group(function () {
+    Route::get('/', [DashboardControler::class, 'index'])->name('dashboard');
+
+    Route::get('/members', [MemberController::class, 'index'])->name('members.index');
+    Route::post('/members', [MemberController::class, 'store'])->name('members.store');
+});
