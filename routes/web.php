@@ -11,8 +11,10 @@ Route::middleware('guest')->group(function () {
 });
 
 Route::middleware('auth')->group(function () {
-    Route::get('/', [DashboardControler::class, 'index'])->name('dashboard');
 
+    Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
+
+    Route::get('/', [DashboardControler::class, 'index'])->name('dashboard');
     Route::get('/members', [MemberController::class, 'index'])->name('members.index');
     Route::post('/members', [MemberController::class, 'store'])->name('members.store');
 });

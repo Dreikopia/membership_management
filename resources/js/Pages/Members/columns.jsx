@@ -38,8 +38,8 @@ export const columns = [
             if (!endDate) return "—";
 
             return new Date(endDate).toLocaleDateString("en-US", {
-                month: "long",
-                day: "numeric",
+                month: "short",
+                day: "2-digit",
                 year: "numeric",
             });
         },
@@ -56,5 +56,9 @@ export const columns = [
                 </Badge>
             );
         },
+    },
+    {
+        accessorKey: "actions",
+        header: "Actions",
     },
 ]

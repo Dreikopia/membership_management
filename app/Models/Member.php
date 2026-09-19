@@ -27,6 +27,11 @@ class Member extends Model
         'status' => MemberStatus::ACTIVE->value,
     ];
 
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
     public function memberships()
     {
         return $this->hasMany(Membership::class);

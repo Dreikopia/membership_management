@@ -1,10 +1,11 @@
 import GuestLayout from '@/Layouts/GuestLayout';
 import { useForm } from '@inertiajs/react';
-import { Mail, Lock } from 'lucide-react';
+import { Mail, Lock, Eye, EyeOff } from 'lucide-react';
 import { InputGroup, InputGroupAddon, InputGroupInput } from '@/components/ui/input-group';
 import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
-import React from 'react';
+import InputError from '@/components/InputError';
+import { useState } from 'react';
 
 const Login = () => {
 
@@ -20,10 +21,12 @@ const Login = () => {
         });
     }
 
+    const [showPassword, setShowPassword] = useState(false);
+
     return (
         <form onSubmit={handleSubmit} className="space-y-4 max-w-sm mx-auto">
 
-            <h1 className='text-2xl font-bold mb-4 text-center'>Log in</h1>
+            <h1 className='text-2xl font-bold mb-4 text-center'>Sign in</h1>
 
             <div>
                 <Label htmlFor="email">Email</Label>
@@ -39,7 +42,7 @@ const Login = () => {
                         onChange={(e) => setData('email', e.target.value)}
                     />
                 </InputGroup>
-                {errors.email && <p className="text-sm text-red-500">{errors.email}</p>}
+                <InputError message={errors.email} />
             </div>
 
             <div>
@@ -51,12 +54,30 @@ const Login = () => {
                     <InputGroupInput
                         id="password"
                         placeholder="Password"
-                        type="password"
+                        type={showPassword ? 'text' : 'password'}
+                        aria-label={showPassword ? 'Hide password' : 'Show password'}
                         value={data.password}
                         onChange={(e) => setData('password', e.target.value)}
                     />
+                    <InputGroupAddon align='inline-end'>
+                        <button
+                            type="button"
+                            className='pr-2'
+                            onClick={() => setShowPassword(!showPassword)}
+                            aria-label={showPassword ? 'Hide password' : 'Show password'}
+                        >
+
+                            {showPassword ? (
+                                <EyeOff className='size-5' />
+                            ) : (
+                                <Eye className='size-5' />
+                            )}
+
+                        </button>
+
+                    </InputGroupAddon>
                 </InputGroup>
-                {errors.password && <p className="text-sm text-red-500">{errors.password}</p>}
+                <InputError message={errors.password} />
             </div>
 
             <Button type="submit" disabled={processing} className="w-full">

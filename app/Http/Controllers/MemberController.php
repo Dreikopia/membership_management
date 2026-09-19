@@ -7,6 +7,7 @@ use App\Http\Requests\StoreMemberRequest;
 use App\Models\Member;
 use App\Models\Plan;
 use App\Models\PlanPrice;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Inertia\Inertia;
 
@@ -47,7 +48,13 @@ class MemberController extends Controller
                 $validated['plan_price_id']
             );
 
-            $member = Member::create($validated);
+            $member = Auth::user()->members()->create([
+                'first_name' => $validated['first_name'],
+                'last_name' => $validated['last_name'],
+                'email' => $validated['email'],
+                'phone' => $validated['phone'],
+                'address' => $validated['address'],
+            ]);
 
             $member->memberships()->create([
                 'plan_price_id' => $planPrice->id,

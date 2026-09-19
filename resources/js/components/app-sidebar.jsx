@@ -1,6 +1,5 @@
 import { Link, usePage } from "@inertiajs/react";
-import { LayoutDashboard, Users, Settings, LogOut } from "lucide-react";
-
+import { LayoutDashboard, Users, Settings } from "lucide-react";
 import {
   Sidebar,
   SidebarContent,
@@ -13,12 +12,13 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
+import LogoutButton from "./LogoutButton";
 
 export function AppSidebar() {
   const { url } = usePage();
 
   return (
-    <Sidebar>
+    <Sidebar >
       <SidebarHeader>
         <div className="flex items-center px-4 py-4">
           <h1 className="text-lg font-semibold">
@@ -31,8 +31,8 @@ export function AppSidebar() {
         <SidebarGroup>
           <SidebarGroupLabel>Main</SidebarGroupLabel>
           <SidebarGroupContent>
-            <SidebarMenu>
 
+            <SidebarMenu className='space-y-1'>
               <SidebarMenuItem>
                 <SidebarMenuButton
                   render={<Link href="/" />}
@@ -53,15 +53,7 @@ export function AppSidebar() {
                 </SidebarMenuButton>
               </SidebarMenuItem>
 
-              <SidebarMenuItem>
-                <SidebarMenuButton
-                  render={<Link href="/settings" />}
-                  isActive={url.startsWith("/settings")}
-                >
-                  <Settings />
-                  <span>Settings</span>
-                </SidebarMenuButton>
-              </SidebarMenuItem>
+
 
             </SidebarMenu>
           </SidebarGroupContent>
@@ -70,14 +62,19 @@ export function AppSidebar() {
 
       <SidebarFooter>
 
+
         <SidebarMenuItem>
           <SidebarMenuButton
-            render={<Link href="/logout" />}
-            isActive={url.startsWith("/logout")}
+            render={<Link href="/settings" />}
+            isActive={url.startsWith("/settings")}
           >
-            <LogOut />
-            <span>Logout</span>
+            <Settings />
+            <span>Settings</span>
           </SidebarMenuButton>
+        </SidebarMenuItem>
+
+        <SidebarMenuItem>
+          <LogoutButton />
         </SidebarMenuItem>
 
       </SidebarFooter>

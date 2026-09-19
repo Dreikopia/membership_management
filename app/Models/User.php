@@ -39,4 +39,9 @@ class User extends Authenticatable
             'status' => UserStatus::class,
         ];
     }
+
+    public function members()
+    {
+        return $this->hasMany(Member::class);
+    }
 }
