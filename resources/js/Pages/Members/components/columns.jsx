@@ -1,10 +1,6 @@
 import { Badge } from "@/components/ui/badge";
-const statusVariants = {
-    active: "default",
-    inactive: "secondary",
-    expired: "destructive",
-    suspended: "outline",
-};
+import ActionsCell from "./ActionsCell";
+import { StatusVariant } from "./StatusVariants";
 
 export const columns = [
     {
@@ -51,7 +47,7 @@ export const columns = [
             const { value, label } = row.original.status;
 
             return (
-                <Badge variant={statusVariants[value]}>
+                <Badge variant={StatusVariant[value]}>
                     {label}
                 </Badge>
             );
@@ -60,5 +56,6 @@ export const columns = [
     {
         accessorKey: "actions",
         header: "Actions",
+        cell: ({ row }) => <ActionsCell member={row.original} />,
     },
 ]

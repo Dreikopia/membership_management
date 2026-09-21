@@ -15,6 +15,9 @@ Route::middleware('auth')->group(function () {
     Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
 
     Route::get('/', [DashboardControler::class, 'index'])->name('dashboard');
+
     Route::get('/members', [MemberController::class, 'index'])->name('members.index');
     Route::post('/members', [MemberController::class, 'store'])->name('members.store');
+    Route::patch('/members/{member}', [MemberController::class, 'update'])->name('members.update');
+
 });

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Enums\MemberStatus;
 use App\Http\Requests\StoreMemberRequest;
+use App\Http\Requests\UpdateMemberRequest;
 use App\Models\Member;
 use App\Models\Plan;
 use App\Models\PlanPrice;
@@ -52,6 +53,7 @@ class MemberController extends Controller
                 'first_name' => $validated['first_name'],
                 'last_name' => $validated['last_name'],
                 'email' => $validated['email'],
+                'date_of_birth' => $validated['date_of_birth'],
                 'phone' => $validated['phone'],
                 'address' => $validated['address'],
             ]);
@@ -67,5 +69,12 @@ class MemberController extends Controller
         return redirect()
             ->route('members.index')
             ->with('success', 'Member added successfully.');
+    }
+
+    public function update(UpdateMemberRequest $request, Member $member)
+    {
+        $member->update($request->validated());
+
+        return back()->with('success', 'Member Updated');
     }
 }

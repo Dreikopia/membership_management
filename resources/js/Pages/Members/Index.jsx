@@ -8,8 +8,8 @@ import {
 import React, { useState } from 'react'
 import Header from '@/components/Header'
 import { DataTable } from "@/components/data-table"
-import { columns } from "./columns"
-import AddMemberDialog from './AddMemberDialog'
+import { columns } from "./components/columns"
+import AddMemberDialog from './components/AddMemberDialog'
 
 const Index = ({ members, plans }) => {
     const [open, setOpen] = useState(false)
