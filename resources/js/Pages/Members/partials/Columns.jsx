@@ -1,8 +1,8 @@
 import { Badge } from "@/components/ui/badge";
-import ActionsCell from "./ActionsCell";
-import { StatusVariant } from "./StatusVariants";
+import ActionsCell from "../components/ActionsCell";
+import { StatusVariant } from "../components/StatusVariants";
 
-export const columns = [
+export const Columns = [
     {
         accessorKey: "id",
         header: "ID",

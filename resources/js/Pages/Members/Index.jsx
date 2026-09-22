@@ -1,4 +1,3 @@
-import { Plus } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import {
     Tooltip,
@@ -8,7 +7,7 @@ import {
 import React, { useState } from 'react'
 import Header from '@/components/Header'
 import { DataTable } from "@/components/data-table"
-import { columns } from "./components/columns"
+import { Columns } from './partials/Columns';
 import AddMemberDialog from './components/AddMemberDialog'
 import { DataTablePagination } from '@/components/data-table-pagination'
 
@@ -20,21 +19,28 @@ const Index = ({ members, plans }) => {
             <Header title="Members"
                 action={
                     <Tooltip>
-                        <TooltipTrigger asChild>
-                            <Button className='cursor-pointer' onClick={() => setOpen(true)}>
-                                <Plus />
-                                Add Member
-                            </Button>
-                        </TooltipTrigger >
+                        <TooltipTrigger
+                            render={
+                                <Button
+                                    className="cursor-pointer"
+                                    onClick={() => setOpen(true)}
+                                />
+                            }
+                        >
+                            Add Member
+                        </TooltipTrigger>
+
                         <TooltipContent>
-                            Add member
+                            Add a new member
                         </TooltipContent>
                     </Tooltip>
-                } />
+                }>
+            </Header>
 
             <div className="flex justify-center py-6 px-6">
                 <div className="w-full max-w-6xl">
-                    <DataTable columns={columns} data={members.data} />
+                    <DataTable columns={Columns} data={members.data} />
+
                     <DataTablePagination meta={members} />
                 </div>
             </div>

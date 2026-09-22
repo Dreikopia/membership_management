@@ -3,5 +3,4 @@ export const StatusVariant = {
     inactive: "secondary",
     expired: "destructive",
     suspended: "outline",
-    success: "success",
 };

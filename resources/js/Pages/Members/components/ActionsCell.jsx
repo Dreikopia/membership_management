@@ -1,8 +1,10 @@
 import { useState } from "react";
 import { router } from "@inertiajs/react";
 import { MoreHorizontal } from "lucide-react";
+
 import MemberProfileDrawer from "./MemberProfileDrawer";
 import { Button } from "@/components/ui/button";
+
 import {
     DropdownMenu,
     DropdownMenuContent,
@@ -12,6 +14,7 @@ import {
     DropdownMenuSeparator,
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+
 import {
     AlertDialog,
     AlertDialogContent,
@@ -21,19 +24,16 @@ import {
 } from "@/components/ui/alert-dialog";
 
 export default function ActionsCell({ member }) {
-
     const [showProfile, setShowProfile] = useState(false);
-    const [profileMode, setProfileMode] = useState('view');
+    const [profileMode, setProfileMode] = useState("view");
+    const [showDelete, setShowDelete] = useState(false);
+
+    const isSuspended = member.status.value === "suspended";
 
     const openProfile = (mode) => {
         setProfileMode(mode);
         setShowProfile(true);
     };
-
-    const [showDelete, setShowDelete] = useState(false);
-    const isSuspended = member.status.value === "suspended";
-
-
 
     const handleToggleSuspend = () => {
         router.patch(`/members/${member.id}/toggle-suspend`);
@@ -42,25 +42,33 @@ export default function ActionsCell({ member }) {
     return (
         <>
             <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                    <Button variant="ghost" size="icon">
-                        <MoreHorizontal className="h-4 w-4" />
-                    </Button>
+                <DropdownMenuTrigger
+                    render={
+                        <Button variant="ghost" size="icon" />
+                    }
+                >
+                    <MoreHorizontal className="h-4 w-4" />
                 </DropdownMenuTrigger>
 
                 <DropdownMenuContent align="end">
                     <DropdownMenuGroup>
                         <DropdownMenuLabel>Actions</DropdownMenuLabel>
 
-                        <DropdownMenuItem onClick={() => openProfile("view")}>
+                        <DropdownMenuItem
+                            onClick={() => openProfile("view")}
+                        >
                             View profile
                         </DropdownMenuItem>
 
-                        <DropdownMenuItem onClick={() => openProfile("edit")}>
+                        <DropdownMenuItem
+                            onClick={() => openProfile("edit")}
+                        >
                             Edit
                         </DropdownMenuItem>
 
-                        <DropdownMenuItem onClick={handleToggleSuspend}>
+                        <DropdownMenuItem
+                            onClick={handleToggleSuspend}
+                        >
                             {isSuspended ? "Reactivate" : "Suspend"}
                         </DropdownMenuItem>
                     </DropdownMenuGroup>
@@ -76,7 +84,6 @@ export default function ActionsCell({ member }) {
                 </DropdownMenuContent>
             </DropdownMenu>
 
-            {/* AlertDialog is outside DropdownMenu */}
             <AlertDialog
                 open={showDelete}
                 onOpenChange={setShowDelete}

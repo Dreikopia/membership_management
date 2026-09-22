@@ -12,7 +12,6 @@ import {
     AlertDialogTrigger,
 } from '@/components/ui/alert-dialog';
 import { SidebarMenuButton } from './ui/sidebar';
-import { Button } from '@/components/ui/button';
 
 export default function LogoutButton() {
     const handleLogout = () => {
@@ -21,11 +20,13 @@ export default function LogoutButton() {
 
     return (
         <AlertDialog>
-            <AlertDialogTrigger asChild>
-                <SidebarMenuButton className='w-full'>
-                    <LogOut className='size-4' />
-                    <span>Logout</span>
-                </SidebarMenuButton>
+            <AlertDialogTrigger
+                render={
+                    <SidebarMenuButton className="w-full" />
+                }
+            >
+                <LogOut className="size-4" />
+                <span>Logout</span>
             </AlertDialogTrigger>
 
             <AlertDialogContent>
@@ -38,8 +39,10 @@ export default function LogoutButton() {
 
                 <AlertDialogFooter>
                     <AlertDialogCancel>Cancel</AlertDialogCancel>
-
-                    <AlertDialogAction onClick={handleLogout} variant="destructive">
+                    <AlertDialogAction
+                        onClick={handleLogout}
+                        variant="destructive"
+                    >
                         Log out
                     </AlertDialogAction>
                 </AlertDialogFooter>
