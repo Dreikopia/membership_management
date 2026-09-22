@@ -23,13 +23,13 @@ function getPageNumbers(current, last) {
     return [1, '...', current, '...', last]
 }
 
-export function DataTablePagination({ meta }) {
+export function DataTablePagination({ meta, params = {} }) {
     const { current_page, last_page, per_page, from, to, total, path } = meta
 
     const goTo = (page, perPage = per_page) => {
         router.get(
             path,
-            { page, per_page: perPage },
+            { ...params, page, per_page: perPage },
             { preserveState: true, preserveScroll: true }
         )
     }

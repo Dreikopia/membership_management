@@ -92,6 +92,7 @@ export function AppSidebar() {
         <SidebarMenuItem>
           <LogoutButton />
         </SidebarMenuItem>
+
       </SidebarFooter>
     </Sidebar>
   );

@@ -17,6 +17,11 @@ class MemberController extends Controller
 {
     public function index(Request $request)
     {
+        // 0. Search term (validated: at most 100 characters)
+        $search = $request->validate([
+            'search' => ['nullable', 'string', 'max:100'],
+        ])['search'] ?? '';
+
         // 1. Decide how many rows to show per page
         $perPage = in_array($request->integer('per_page'), [10, 15, 25, 50, 100])
             ? $request->integer('per_page')
@@ -24,6 +29,7 @@ class MemberController extends Controller
 
         // 2. Get ONE page of members (not all of them)
         $members = Member::with('memberships.planPrice.plan')
+            ->when($search !== '', fn ($query) => $query->search($search))
             ->latest()
             ->paginate($perPage)
             ->withQueryString();
@@ -48,6 +54,7 @@ class MemberController extends Controller
         return Inertia::render('Members/Index', [
             'members' => $members,
             'plans' => $plans,
+            'search' => $search,
         ]);
     }
 
