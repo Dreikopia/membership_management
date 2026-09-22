@@ -2,7 +2,7 @@ import React from 'react'
 
 const Header = ({ title, description, action }) => {
     return (
-        <div className="flex items-center justify-between border-b pb-6">
+        <div className="flex items-center justify-between border-b py-4">
             <div>
                 <h1 className="text-2xl font-semibold tracking-tight">
                     {title}

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { router } from "@inertiajs/react";
-import { MoreVertical } from "lucide-react";
+import { MoreHorizontal } from "lucide-react";
 import MemberProfileDrawer from "./MemberProfileDrawer";
 import { Button } from "@/components/ui/button";
 import {
@@ -44,7 +44,7 @@ export default function ActionsCell({ member }) {
             <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                     <Button variant="ghost" size="icon">
-                        <MoreVertical className="h-4 w-4" />
+                        <MoreHorizontal className="h-4 w-4" />
                     </Button>
                 </DropdownMenuTrigger>
 

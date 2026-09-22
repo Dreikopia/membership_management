@@ -8,18 +8,27 @@ use App\Http\Requests\UpdateMemberRequest;
 use App\Models\Member;
 use App\Models\Plan;
 use App\Models\PlanPrice;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Inertia\Inertia;
 
 class MemberController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
+        // 1. Decide how many rows to show per page
+        $perPage = in_array($request->integer('per_page'), [10, 15, 25, 50, 100])
+            ? $request->integer('per_page')
+            : 15;
+
+        // 2. Get ONE page of members (not all of them)
         $members = Member::with('memberships.planPrice.plan')
             ->latest()
-            ->paginate(20);
+            ->paginate($perPage)
+            ->withQueryString();
 
+        // 3. Add the status label to each member on this page
         $members->through(function ($member) {
             return [
                 ...$member->toArray(),
@@ -30,10 +39,12 @@ class MemberController extends Controller
             ];
         });
 
+        // 4. Active plans (unrelated to pagination)
         $plans = Plan::with('prices')
             ->where('status', 'active')
             ->get();
 
+        // 5. Send everything to React
         return Inertia::render('Members/Index', [
             'members' => $members,
             'plans' => $plans,

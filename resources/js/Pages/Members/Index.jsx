@@ -10,6 +10,7 @@ import Header from '@/components/Header'
 import { DataTable } from "@/components/data-table"
 import { columns } from "./components/columns"
 import AddMemberDialog from './components/AddMemberDialog'
+import { DataTablePagination } from '@/components/data-table-pagination'
 
 const Index = ({ members, plans }) => {
     const [open, setOpen] = useState(false)
@@ -17,7 +18,6 @@ const Index = ({ members, plans }) => {
     return (
         <div className='px-6'>
             <Header title="Members"
-                description="Manage members"
                 action={
                     <Tooltip>
                         <TooltipTrigger asChild>
@@ -32,9 +32,10 @@ const Index = ({ members, plans }) => {
                     </Tooltip>
                 } />
 
-            <div className="flex justify-center py-10 px-6">
+            <div className="flex justify-center py-6 px-6">
                 <div className="w-full max-w-6xl">
                     <DataTable columns={columns} data={members.data} />
+                    <DataTablePagination meta={members} />
                 </div>
             </div>
 
